@@ -24,12 +24,11 @@ export default function FinalLetter({ onRestart }: FinalLetterProps) {
   const handleSeal = () => {
     if (isSealed) return;
 
-    // Create kiss particles
     const particles: KissParticle[] = [];
     for (let i = 0; i < 12; i++) {
       particles.push({
         id: Date.now() + i,
-        x: 50 + (Math.random() - 0.5) * 20, // Center around button
+        x: 50 + (Math.random() - 0.5) * 20,
         driftX: (Math.random() - 0.5) * 40,
         rotation: Math.random() * 360,
       });
@@ -38,7 +37,6 @@ export default function FinalLetter({ onRestart }: FinalLetterProps) {
 
     setIsSealed(true);
 
-    // Clear particles after animation, then show sealed page
     setTimeout(() => {
       setKissParticles([]);
       setShowSealedPage(true);
@@ -52,11 +50,8 @@ export default function FinalLetter({ onRestart }: FinalLetterProps) {
   return (
     <div className="page-container">
       <div className="font-display min-h-screen flex items-center justify-center py-10 px-4 bg-[#FFF4F8] relative overflow-hidden">
-        {/* Grid Paper Background */}
         <div className="pointer-events-none absolute inset-0 z-0">
           <div className="absolute inset-0 grid-paper"></div>
-
-          {/* Decorative SVG Elements */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -121,7 +116,6 @@ export default function FinalLetter({ onRestart }: FinalLetterProps) {
 
         <div className="pointer-events-none fixed inset-0 z-40"></div>
 
-        {/* Main Content */}
         <div className="relative z-10 w-full max-w-2xl transition-all duration-600 opacity-100 translate-y-0">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -129,7 +123,6 @@ export default function FinalLetter({ onRestart }: FinalLetterProps) {
             transition={{ duration: 0.6 }}
             className="bg-[#FFF8E7] rounded-3xl p-6 sm:p-8 shadow-xl border border-pink-100"
           >
-            {/* Header */}
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-[#f04299] flex items-center justify-center text-white shadow-md">
@@ -155,7 +148,6 @@ export default function FinalLetter({ onRestart }: FinalLetterProps) {
               </div>
             </div>
 
-            {/* Letter Content */}
             <article className="handwriting text-sm sm:text-base text-[#1b0d14] leading-relaxed space-y-4">
               <p className="text-[#f04299] font-semibold">
                 My sweetest Cutiepie,
@@ -164,37 +156,35 @@ export default function FinalLetter({ onRestart }: FinalLetterProps) {
                 You&apos;re the calm I reach for and the laugh that brightens my
                 day.
               </p>
-              <p className="text-[#7fbcd9]">
+              <p className="text-[#5a9bb8]">
                 I hope this tiny world made you smile — and whispered how much
                 you mean to me.
               </p>
               <p>
                 I&apos;ll keep making memories, big and small, always with you.
               </p>
-              <p className="text-[#cdb4db]">
+              <p className="text-[#a67fb8]">
                 Forever yours, in every little universe.
               </p>
             </article>
 
-            {/* Footer with Buttons */}
             <div className="mt-6 flex flex-col sm:flex-row justify-between gap-3 items-center">
               <div className="text-xs text-[#9a4c73]">
                 Sealing will finish the experience.
               </div>
               <div className="flex gap-3 relative">
-                {/* Kiss Particles Container */}
                 <AnimatePresence>
                   {kissParticles.map((particle) => (
                     <motion.div
                       key={particle.id}
                       className="kiss-particle"
-                      style={{
-                        left: `${particle.x}%`,
-                        // @ts-ignore - CSS custom properties
-                        '--driftX': `${particle.driftX}px`,
-                        // @ts-ignore - CSS custom properties
-                        '--rot': `${particle.rotation}deg`,
-                      }}
+                      style={
+                        {
+                          left: `${particle.x}%`,
+                          '--driftX': `${particle.driftX}px`,
+                          '--rot': `${particle.rotation}deg`,
+                        } as React.CSSProperties
+                      }
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}

@@ -374,14 +374,14 @@ export default function Playlist({ onContinue }: PlaylistProps) {
                 {tracks.map((track) => (
                   <div
                     key={track.id}
-                    className={`group relative cursor-pointer transform transition-all duration-300 flex-shrink-0 w-56 hover:scale-105 hover:z-10 ${
+                    className={`group relative cursor-pointer transform transition-all duration-300 flex-shrink-0 w-56 h-full hover:scale-105 hover:z-10 ${
                       currentTrack === track.id
                         ? 'ring-2 ring-[#f04299] ring-offset-2 rounded-xl'
                         : ''
                     }`}
                     onClick={() => handleTrackClick(track.id)}
                   >
-                    <div className="relative bg-white rounded-xl p-4 border-2 shadow-lg transition-all border-pink-100 hover:border-pink-200 hover:shadow-xl group-hover:shadow-pink-200/30">
+                    <div className="relative bg-white rounded-xl p-4 border-2 shadow-lg transition-all border-pink-100 hover:border-pink-200 hover:shadow-xl group-hover:shadow-pink-200/30 h-full flex flex-col">
                       <div className="relative mb-3">
                         <div className="relative w-full aspect-square rounded-lg overflow-hidden bg-gradient-to-br from-pink-200 via-purple-200 to-pink-300 shadow-md">
                           <Image
@@ -439,11 +439,11 @@ export default function Playlist({ onContinue }: PlaylistProps) {
                           <div className="absolute top-2 right-2 w-3 h-3 bg-[#f04299] rounded-full animate-pulse"></div>
                         )}
                       </div>
-                      <div className="text-center">
-                        <div className="font-bold text-[#1b0d14] mb-1 text-sm">
+                      <div className="text-center flex-1 flex flex-col justify-center">
+                        <div className="font-bold text-[#1b0d14] mb-1 text-sm min-h-[1.25rem]">
                           {track.title}
                         </div>
-                        <div className="text-xs text-[#9a4c73] leading-relaxed">
+                        <div className="text-xs text-[#9a4c73] leading-relaxed min-h-[2.5rem] flex items-center justify-center">
                           {track.description}
                         </div>
                       </div>
@@ -478,7 +478,7 @@ export default function Playlist({ onContinue }: PlaylistProps) {
 
         {/* Continue Button */}
         {onContinue && (
-          <div className="text-center">
+          <div className="text-center mt-8 sm:mt-10">
             <button
               onClick={onContinue}
               className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-[#f04299] text-white font-semibold shadow-md transition-all transform hover:scale-105 active:scale-95 hover:shadow-pink-300/50 focus:outline-none focus:ring-4 focus:ring-pink-300 cursor-pointer"

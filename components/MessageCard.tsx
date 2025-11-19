@@ -7,6 +7,7 @@ import { messageData } from '@/data/message';
 import { showToast } from '@/lib/toast';
 import Playlist from '@/components/Playlist';
 import FlipCards from '@/components/FlipCards';
+import TypewriterText from '@/components/TypewriterText';
 
 interface MessageCardProps {
   isRevealed: boolean;
@@ -21,13 +22,50 @@ export default function MessageCard({
   const [showLetter, setShowLetter] = useState(false);
   const [showPlaylist, setShowPlaylist] = useState(false);
   const [showFlipCards, setShowFlipCards] = useState(false);
+  const [typewriterComplete, setTypewriterComplete] = useState({
+    signature: false,
+    love: false,
+    stamped: false,
+  });
+  const [stampText, setStampText] = useState({ love: '', stamped: '' });
 
   const handleEnvelopeClick = () => {
     setIsEnvelopeOpen(true);
     // Show letter after envelope opens
     setTimeout(() => {
       setShowLetter(true);
+      // Start typewriter effects for stamp text after letter appears
+      setTimeout(() => {
+        typeText('LOVE', 'love', () =>
+          setTypewriterComplete((prev) => ({ ...prev, love: true }))
+        );
+        setTimeout(() => {
+          typeText('STAMPED', 'stamped', () =>
+            setTypewriterComplete((prev) => ({ ...prev, stamped: true }))
+          );
+        }, 800);
+      }, 1000);
     }, 400);
+  };
+
+  const typeText = (
+    fullText: string,
+    key: 'love' | 'stamped',
+    onComplete: () => void
+  ) => {
+    let currentIndex = 0;
+    const interval = setInterval(() => {
+      if (currentIndex <= fullText.length) {
+        setStampText((prev) => ({
+          ...prev,
+          [key]: fullText.slice(0, currentIndex),
+        }));
+        currentIndex++;
+      } else {
+        clearInterval(interval);
+        onComplete();
+      }
+    }, 100);
   };
 
   const handleCopy = async () => {
@@ -223,7 +261,7 @@ export default function MessageCard({
                         >
                           <Image
                             src="/assets/letter-C680mUtz.webp"
-                            alt="Love"
+                            alt="Decorative love letter illustration"
                             width={96}
                             height={96}
                             className="w-24 h-auto object-contain drop-shadow-lg"
@@ -262,7 +300,18 @@ export default function MessageCard({
                             </div>
                             <div className="mt-8 ml-auto w-fit">
                               <div className="font-medium text-[#f04299]">
-                                With all my love, Always yours 💕
+                                <TypewriterText
+                                  text="With all my love, Always yours 💕"
+                                  duration={2}
+                                  delay={0}
+                                  onComplete={() =>
+                                    setTypewriterComplete((prev) => ({
+                                      ...prev,
+                                      signature: true,
+                                    }))
+                                  }
+                                  showCursor={false}
+                                />
                               </div>
                             </div>
                           </div>
@@ -449,7 +498,7 @@ export default function MessageCard({
                               }}
                             >
                               <textPath href="#topArc" startOffset="50%">
-                                LOVE
+                                {stampText.love || ''}
                               </textPath>
                             </text>
                             <path
@@ -468,16 +517,18 @@ export default function MessageCard({
                               }}
                             >
                               <textPath href="#bottomArc" startOffset="50%">
-                                STAMPED
+                                {stampText.stamped || ''}
                               </textPath>
                             </text>
                           </svg>
                         </div>
 
                         {/* Decorative sparkles */}
-                        <div className="absolute top-4 left-4 text-pink-300 opacity-30 text-xs animate-float-slow">
-                          ✨
-                        </div>
+                        {typewriterComplete.signature && (
+                          <div className="absolute top-4 left-4 text-pink-300 opacity-30 text-xs animate-float-slow">
+                            ✨
+                          </div>
+                        )}
                         <div
                           className="absolute bottom-24 right-4 text-pink-300 opacity-30 text-xs animate-float-slow"
                           style={{ animationDelay: '1s' }}
@@ -486,16 +537,20 @@ export default function MessageCard({
                         </div>
                       </div>
 
-                      {/* Continue button */}
-                      <div className="flex justify-center mt-6 animate-slideUp">
-                        <button
-                          onClick={() => setShowPlaylist(true)}
-                          className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-[#f04299] text-white font-semibold shadow-md transition-all transform hover:scale-105 active:scale-95 hover:shadow-pink-300/50 focus:outline-none focus:ring-4 focus:ring-pink-300 cursor-pointer"
-                          aria-label="Continue to see more"
-                        >
-                          Continue To See More ✨
-                        </button>
-                      </div>
+                      {/* Continue button - only show when all typewriter effects are complete */}
+                      {typewriterComplete.signature &&
+                        typewriterComplete.love &&
+                        typewriterComplete.stamped && (
+                          <div className="flex justify-center mt-6 animate-slideUp">
+                            <button
+                              onClick={() => setShowPlaylist(true)}
+                              className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-[#f04299] text-white font-semibold shadow-md transition-all transform hover:scale-105 active:scale-95 hover:shadow-pink-300/50 focus:outline-none focus:ring-4 focus:ring-pink-300 cursor-pointer"
+                              aria-label="Continue to see more"
+                            >
+                              Continue To See More ✨
+                            </button>
+                          </div>
+                        )}
                     </motion.div>
                   )}
                 </AnimatePresence>

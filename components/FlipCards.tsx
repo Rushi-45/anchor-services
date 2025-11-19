@@ -61,7 +61,12 @@ export default function FlipCards({ onRestart }: FlipCardsProps) {
 
   useEffect(() => {
     if (flippedCards.size === cards.length) {
-      setShowModal(true);
+      // Add delay to allow user to see the back of the last card
+      const timer = setTimeout(() => {
+        setShowModal(true);
+      }, 3500); // 1.5 second delay
+
+      return () => clearTimeout(timer);
     }
   }, [flippedCards.size]);
 
@@ -154,7 +159,7 @@ export default function FlipCards({ onRestart }: FlipCardsProps) {
                       <div className="relative w-full h-full">
                         <Image
                           src={card.image}
-                          alt="Memory card"
+                          alt={`Memory card ${card.id} - ${card.message.substring(0, 30)}...`}
                           fill
                           className="object-cover"
                           sizes="(max-width: 640px) 100vw, 33vw"

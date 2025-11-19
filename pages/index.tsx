@@ -29,19 +29,62 @@ export default function Home() {
     <>
       <Head>
         <title>Happy National Princess Day 👑</title>
-        <meta name="description" content="A special surprise for National Princess Day" />
+        <meta
+          name="description"
+          content="A special surprise for National Princess Day - A delightful interactive experience with love letters, music, and memories"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="keywords"
+          content="National Princess Day, love letter, surprise, romantic, interactive"
+        />
+        <meta name="author" content="Made with 💕" />
+
+        {/* Favicon - Multiple formats for better browser support */}
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/favicon.svg" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Happy National Princess Day 👑" />
+        <meta
+          property="og:description"
+          content="A special surprise for National Princess Day - A delightful interactive experience with love letters, music, and memories"
+        />
+        <meta property="og:image" content="/og-image.jpg" />
+        <meta
+          property="og:url"
+          content="https://national-princess-day.vercel.app"
+        />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Happy National Princess Day 👑" />
+        <meta
+          name="twitter:description"
+          content="A special surprise for National Princess Day"
+        />
+        <meta name="twitter:image" content="/og-image.jpg" />
+
+        {/* Additional SEO */}
+        <meta name="theme-color" content="#fff8e7" />
+        <link rel="canonical" href="https://national-princess-day.vercel.app" />
       </Head>
 
       <main className="min-h-screen">
-        {!isGiftOpened && <Hero onOpenGift={handleOpenGift} isGiftOpened={isGiftOpened} />}
-        {isGiftOpened && <MessageCard isRevealed={isGiftOpened} onRestart={handleRestart} />}
+        {!isGiftOpened && (
+          <Hero onOpenGift={handleOpenGift} isGiftOpened={isGiftOpened} />
+        )}
+        {isGiftOpened && (
+          <MessageCard isRevealed={isGiftOpened} onRestart={handleRestart} />
+        )}
         <Confetti trigger={showConfetti} onComplete={handleConfettiComplete} />
 
         <footer className="px-4 py-8 text-center text-text/60">
           <p className="text-sm">
-            National Princess Day — {new Date().toLocaleDateString('en-US', {
+            National Princess Day —{' '}
+            {new Date().toLocaleDateString('en-US', {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
@@ -67,4 +110,3 @@ export default function Home() {
     </>
   );
 }
-
