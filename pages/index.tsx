@@ -1,44 +1,24 @@
 'use client';
 
-import { useState } from 'react';
 import Head from 'next/head';
-import Hero from '@/components/Hero';
-import MessageCard from '@/components/MessageCard';
-import Confetti from '@/components/Confetti';
+import AnchorHero from '@/components/AnchorHero';
 import { Toaster } from '@/lib/toast';
 
 export default function Home() {
-  const [isGiftOpened, setIsGiftOpened] = useState(false);
-  const [showConfetti, setShowConfetti] = useState(false);
-
-  const handleOpenGift = () => {
-    setIsGiftOpened(true);
-    setShowConfetti(true);
-  };
-
-  const handleConfettiComplete = () => {
-    setShowConfetti(false);
-  };
-
-  const handleRestart = () => {
-    setIsGiftOpened(false);
-    setShowConfetti(false);
-  };
-
   return (
     <>
       <Head>
-        <title>Happy National Princess Day 👑</title>
+        <title>Professional Anchoring Services | Request an Anchor</title>
         <meta
           name="description"
-          content="A special surprise for National Princess Day - A delightful interactive experience with love letters, music, and memories"
+          content="Request professional anchoring services for your events, shows, and conferences. Experienced anchor available for all types of events."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta
           name="keywords"
-          content="National Princess Day, love letter, surprise, romantic, interactive"
+          content="anchor, anchoring services, event anchor, professional anchor, hosting services, event management"
         />
-        <meta name="author" content="Made with 💕" />
+        <meta name="author" content="Professional Anchoring Services" />
 
         {/* Favicon - Multiple formats for better browser support */}
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -47,51 +27,33 @@ export default function Home() {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Happy National Princess Day 👑" />
+        <meta
+          property="og:title"
+          content="Professional Anchoring Services | Request an Anchor"
+        />
         <meta
           property="og:description"
-          content="A special surprise for National Princess Day - A delightful interactive experience with love letters, music, and memories"
+          content="Request professional anchoring services for your events, shows, and conferences."
         />
         <meta property="og:image" content="/og-image.jpg" />
-        <meta
-          property="og:url"
-          content="https://national-princess-day.vercel.app"
-        />
+        <meta property="og:url" content="https://anchor-services.vercel.app" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Happy National Princess Day 👑" />
+        <meta name="twitter:title" content="Professional Anchoring Services" />
         <meta
           name="twitter:description"
-          content="A special surprise for National Princess Day"
+          content="Request professional anchoring services for your events"
         />
         <meta name="twitter:image" content="/og-image.jpg" />
 
         {/* Additional SEO */}
         <meta name="theme-color" content="#fff8e7" />
-        <link rel="canonical" href="https://national-princess-day.vercel.app" />
+        <link rel="canonical" href="https://anchor-services.vercel.app" />
       </Head>
 
       <main className="min-h-screen">
-        {!isGiftOpened && (
-          <Hero onOpenGift={handleOpenGift} isGiftOpened={isGiftOpened} />
-        )}
-        {isGiftOpened && (
-          <MessageCard isRevealed={isGiftOpened} onRestart={handleRestart} />
-        )}
-        <Confetti trigger={showConfetti} onComplete={handleConfettiComplete} />
-
-        <footer className="px-4 py-8 text-center text-text/60">
-          <p className="text-sm">
-            National Princess Day —{' '}
-            {new Date().toLocaleDateString('en-US', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </p>
-          <p className="text-xs mt-2">Made with 💕</p>
-        </footer>
+        <AnchorHero />
       </main>
 
       <Toaster

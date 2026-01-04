@@ -65,7 +65,8 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
       },
     });
     return controls.stop;
-  }, [text, duration, onComplete, count, currentText]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [text, duration, count, currentText]);
 
   return (
     <span className={className}>
