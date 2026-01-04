@@ -1,25 +1,21 @@
-# 👑 National Princess Day Surprise
+# 🎤 Professional Anchoring Services
 
 <div align="center">
 
-## 🌐 **[👉 VIEW LIVE SITE 👈](https://happy-princess-dayy.netlify.app/)**
-
-[![Live Site](https://img.shields.io/badge/🌐_Live_Site-happy--princess--dayy.netlify.app-FF69B4?style=for-the-badge)](https://happy-princess-dayy.netlify.app/)
+A beautiful, modern Next.js website for requesting professional anchoring services for events, shows, and conferences.
 
 </div>
-
-A delightful single-page Next.js site to celebrate National Princess Day with a special surprise message, beautiful animations, and confetti!
 
 ## ✨ Features
 
 - 🎨 Beautiful pastel design with soft colors and rounded cards
 - 🎭 Smooth animations using Framer Motion
-- 🎊 Confetti celebration on gift reveal
+- 📝 Multi-step form for anchor requests
 - 📱 Fully responsive and mobile-first
 - ♿ Accessible with keyboard navigation and ARIA labels
 - 🔔 Toast notifications for user feedback
-- 🖼️ Photo grid for memories
-- 📋 Copy message functionality
+- ✨ Cute animations and GIFs throughout
+- 🎯 Professional yet friendly design
 
 ## 🚀 Quick Start
 
@@ -64,19 +60,6 @@ npm test
 
 ## 🎨 Customization
 
-### Edit the Message
-
-Edit the message content in `data/message.ts`:
-
-```typescript
-export const messageData = {
-  title: 'Happy National Princess Day 👑',
-  subtitle: 'To my favorite princess — today, and every day.',
-  body: `Your custom message here...`,
-  // ...
-};
-```
-
 ### Change Colors
 
 Update CSS variables in `styles/globals.css`:
@@ -90,21 +73,23 @@ Update CSS variables in `styles/globals.css`:
 }
 ```
 
-### Replace Images
+### Update Form Fields
 
-Add your own images to `public/assets/` and update the image paths in the respective components:
-- Hero images: `components/Hero.tsx`
-- Letter images: `components/MessageCard.tsx`
-- Music covers: `components/Playlist.tsx`
-- Flip card images: `components/FlipCards.tsx`
+Edit the form steps in `components/steps/`:
+- `Step1ClientInfo.tsx` - Company information
+- `Step2EventInfo.tsx` - Event details
+- `Step3AnchorRequirements.tsx` - Anchor requirements
+- `Step4Logistics.tsx` - Event logistics
+- `Step5AdditionalInfo.tsx` - Additional information
 
 ## 🚢 Deployment
 
-### 🌐 Live Site
+### Deploy to Vercel
 
-**👉 [View Live Site](https://happy-princess-dayy.netlify.app/) 👈**
-
-The site is currently deployed on Netlify and accessible at the URL above.
+1. Push your code to GitHub
+2. Go to [vercel.com](https://vercel.com)
+3. Click "New Project" and import your repository
+4. Vercel will automatically detect Next.js and deploy
 
 ### Deploy to Netlify
 
@@ -112,17 +97,6 @@ The site is currently deployed on Netlify and accessible at the URL above.
 2. Go to [netlify.com](https://netlify.com)
 3. Click "New site from Git" and connect your repository
 4. Netlify will automatically detect Next.js and deploy
-5. Your site will be live with a custom domain or netlify.app subdomain
-
-### Deploy to Vercel (Alternative)
-
-1. Push your code to GitHub
-2. Go to [vercel.com](https://vercel.com)
-3. Click "New Project" and import your repository
-4. Vercel will automatically detect Next.js and deploy
-
-**One-click deploy:**
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=YOUR_REPO_URL)
 
 ### Deploy to Render
 
@@ -137,33 +111,31 @@ The site is currently deployed on Netlify and accessible at the URL above.
 ## 📁 Project Structure
 
 ```
-princess-day/
+anchor-services/
 ├── components/
-│   ├── Hero.tsx           # Hero section with crown animation
-│   ├── MessageCard.tsx    # Animated message card with envelope
-│   ├── Playlist.tsx       # Music playlist with carousel
-│   ├── FlipCards.tsx      # 3D flip cards with messages
-│   ├── FinalLetter.tsx    # Final love letter page
-│   ├── SealedLetter.tsx   # Sealed letter confirmation page
-│   ├── TypewriterText.tsx # Typewriter effect component
-│   └── Confetti.tsx       # Confetti animation
-├── data/
-│   └── message.ts         # Message content (editable)
+│   ├── AnchorHero.tsx        # Home page hero section
+│   ├── Stepper.tsx           # Progress stepper component
+│   ├── StepperForm.tsx       # Main form container
+│   ├── steps/                 # Form step components
+│   │   ├── Step1ClientInfo.tsx
+│   │   ├── Step2EventInfo.tsx
+│   │   ├── Step3AnchorRequirements.tsx
+│   │   ├── Step4Logistics.tsx
+│   │   └── Step5AdditionalInfo.tsx
+│   ├── Confetti.tsx          # Confetti animation
+│   └── TypewriterText.tsx    # Typewriter effect component
+├── types/
+│   └── form.ts               # TypeScript form types
 ├── lib/
-│   └── toast.ts           # Toast notifications
+│   └── toast.ts              # Toast notifications
 ├── pages/
-│   ├── _app.tsx           # App wrapper
-│   └── index.tsx          # Main page
+│   ├── _app.tsx              # App wrapper
+│   ├── index.tsx             # Home page
+│   └── form.tsx              # Form page
 ├── public/
-│   └── assets/
-│       ├── crown.svg      # Crown illustration
-│       ├── intro-*.webp   # Hero section images
-│       ├── letter-*.webp  # Letter decorative images
-│       ├── music*.png     # Music track cover images
-│       ├── music*.mp3     # Audio files
-│       └── pic*.png       # Flip card images
+│   └── assets/               # Images and GIFs
 ├── styles/
-│   └── globals.css        # Global styles & CSS variables
+│   └── globals.css           # Global styles & CSS variables
 └── package.json
 ```
 
@@ -175,7 +147,24 @@ princess-day/
 - **Framer Motion** - Smooth animations
 - **React Hot Toast** - Toast notifications
 
-## 📝 License
+## 📝 Routes
 
-Made with 💕 for National Princess Day
+- `/` - Home page with hero section and information
+- `/form` - Multi-step anchor request form
 
+## 🎯 Features Overview
+
+### Home Page
+- Beautiful hero section with animations
+- Feature highlights
+- "How it works" section
+- Call-to-action buttons
+
+### Request Form
+- 5-step stepper form
+- Progress indicator
+- Form validation
+- Smooth transitions between steps
+- Success celebration with confetti
+
+Made with 💕 for Professional Anchoring Services
