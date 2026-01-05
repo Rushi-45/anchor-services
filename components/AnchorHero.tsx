@@ -22,7 +22,7 @@ export default function AnchorHero() {
   }, []);
 
   return (
-    <div className="app relative w-full min-h-screen overflow-hidden font-display">
+    <div className="app relative w-full min-h-[calc(100vh-200px)] overflow-hidden font-display">
       {/* Dreamy background */}
       <div className="dreamy-bg" />
 

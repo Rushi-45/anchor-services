@@ -10,6 +10,7 @@ import Step4Logistics from './steps/Step4Logistics';
 import Step5AdditionalInfo from './steps/Step5AdditionalInfo';
 import { AnchorRequestFormData, FormStep } from '@/types/form';
 import { showToast } from '@/lib/toast';
+import { sendFormEmail } from '@/lib/email';
 
 const STEPS = [
   { label: 'Company', description: 'Your Information' },
@@ -55,10 +56,14 @@ interface StepperFormProps {
 
 export default function StepperForm({ onComplete }: StepperFormProps) {
   const [currentStep, setCurrentStep] = useState<FormStep>(1);
-  const [formData, setFormData] = useState<AnchorRequestFormData>(initialFormData);
+  const [formData, setFormData] =
+    useState<AnchorRequestFormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const updateFormData = (step: FormStep, data: Partial<AnchorRequestFormData>) => {
+  const updateFormData = (
+    step: FormStep,
+    data: Partial<AnchorRequestFormData>
+  ) => {
     setFormData((prev) => ({
       ...prev,
       ...data,
@@ -80,13 +85,21 @@ export default function StepperForm({ onComplete }: StepperFormProps) {
   const handleSubmit = async () => {
     setIsSubmitting(true);
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      
+      // Send email with form data
+      await sendFormEmail(formData);
+
       showToast.success('Form submitted successfully! 🎉');
       onComplete?.(formData);
     } catch (error) {
-      showToast.error('Failed to submit form. Please try again.');
+      console.error('Submission error:', error);
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : 'Failed to submit form. Please try again.';
+      showToast.error(errorMessage);
+      // Still call onComplete even if email fails, so user can see success screen
+      // You can remove this if you want to block completion on email failure
+      onComplete?.(formData);
     } finally {
       setIsSubmitting(false);
     }
@@ -98,9 +111,7 @@ export default function StepperForm({ onComplete }: StepperFormProps) {
         return (
           <Step1ClientInfo
             data={formData.clientInfo}
-            onChange={(data) =>
-              updateFormData(1, { clientInfo: data })
-            }
+            onChange={(data) => updateFormData(1, { clientInfo: data })}
             onNext={handleNext}
           />
         );
@@ -108,9 +119,7 @@ export default function StepperForm({ onComplete }: StepperFormProps) {
         return (
           <Step2EventInfo
             data={formData.eventInfo}
-            onChange={(data) =>
-              updateFormData(2, { eventInfo: data })
-            }
+            onChange={(data) => updateFormData(2, { eventInfo: data })}
             onNext={handleNext}
             onPrevious={handlePrevious}
           />
@@ -128,9 +137,7 @@ export default function StepperForm({ onComplete }: StepperFormProps) {
         return (
           <Step4Logistics
             data={formData.logistics}
-            onChange={(data) =>
-              updateFormData(4, { logistics: data })
-            }
+            onChange={(data) => updateFormData(4, { logistics: data })}
             onNext={handleNext}
             onPrevious={handlePrevious}
           />
@@ -139,9 +146,7 @@ export default function StepperForm({ onComplete }: StepperFormProps) {
         return (
           <Step5AdditionalInfo
             data={formData.additionalInfo}
-            onChange={(data) =>
-              updateFormData(5, { additionalInfo: data })
-            }
+            onChange={(data) => updateFormData(5, { additionalInfo: data })}
             onPrevious={handlePrevious}
             onSubmit={handleSubmit}
             isSubmitting={isSubmitting}
@@ -153,7 +158,7 @@ export default function StepperForm({ onComplete }: StepperFormProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#fff8e7] py-8">
+    <div className="min-h-[calc(100vh-200px)] bg-[#fff8e7] py-8">
       {/* Stepper Progress */}
       <Stepper
         currentStep={currentStep}
@@ -178,4 +183,3 @@ export default function StepperForm({ onComplete }: StepperFormProps) {
     </div>
   );
 }
-
