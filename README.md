@@ -60,6 +60,7 @@ The form uses **Formspree**, a React-friendly library that handles form submissi
 3. **Update Environment Variables**:
    - Create a `.env.local` file in the root directory
    - Add your Formspree endpoint:
+
    ```env
    NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/your-form-id
    NEXT_PUBLIC_WHATSAPP_NUMBER=1234567890
@@ -72,6 +73,7 @@ The form uses **Formspree**, a React-friendly library that handles form submissi
    - Provide analytics (on paid plans)
 
 **Why Formspree?**
+
 - ✅ Built specifically for React
 - ✅ No complex setup (no service IDs, template IDs, or API keys needed)
 - ✅ Just one endpoint URL
@@ -81,6 +83,7 @@ The form uses **Formspree**, a React-friendly library that handles form submissi
 
 **Alternative React Libraries:**
 If you prefer other options, you could also use:
+
 - **React Email + Resend** - For more control over email templates
 - **SendGrid** - Enterprise-grade email service
 - **EmailJS** - Client-side email service (what we replaced)
@@ -140,6 +143,7 @@ Update CSS variables in `styles/globals.css`:
 ### Update Form Fields
 
 Edit the form steps in `components/steps/`:
+
 - `Step1ClientInfo.tsx` - Company information
 - `Step2EventInfo.tsx` - Event details
 - `Step3AnchorRequirements.tsx` - Anchor requirements
@@ -160,6 +164,7 @@ Edit the form steps in `components/steps/`:
 **📖 See [NETLIFY_DEPLOYMENT.md](./NETLIFY_DEPLOYMENT.md) for complete step-by-step instructions.**
 
 Quick steps:
+
 1. Push your code to GitHub
 2. Go to [netlify.com](https://netlify.com) and sign up/login
 3. Click "Add new site" → "Import an existing project"
@@ -232,12 +237,14 @@ anchor-services/
 ## 🎯 Features Overview
 
 ### Home Page
+
 - Beautiful hero section with animations
 - Feature highlights
 - "How it works" section
 - Call-to-action buttons
 
 ### Request Form
+
 - 5-step stepper form
 - Progress indicator
 - Form validation

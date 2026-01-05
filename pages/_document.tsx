@@ -1,10 +1,14 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 
 // Get website URL from environment or use default
-const WEBSITE_URL = process.env.NEXT_PUBLIC_WEBSITE_URL || 'https://anchor-services.vercel.app';
-const COMPANY_NAME = process.env.NEXT_PUBLIC_COMPANY_NAME || 'Professional Anchoring Services';
-const COMPANY_EMAIL = process.env.NEXT_PUBLIC_COMPANY_EMAIL || 'contact@anchorservices.com';
-const COMPANY_PHONE = process.env.NEXT_PUBLIC_COMPANY_PHONE || '+1 234 567 8900';
+const WEBSITE_URL =
+  process.env.NEXT_PUBLIC_WEBSITE_URL || 'https://anchor-services.vercel.app';
+const COMPANY_NAME =
+  process.env.NEXT_PUBLIC_COMPANY_NAME || 'Professional Anchoring Services';
+const COMPANY_EMAIL =
+  process.env.NEXT_PUBLIC_COMPANY_EMAIL || 'contact@anchorservices.com';
+const COMPANY_PHONE =
+  process.env.NEXT_PUBLIC_COMPANY_PHONE || '+1 234 567 8900';
 
 export default function Document() {
   // Organization Schema - Global company information
@@ -14,7 +18,8 @@ export default function Document() {
     name: COMPANY_NAME,
     url: WEBSITE_URL,
     logo: `${WEBSITE_URL}/favicon.svg`,
-    description: 'Professional anchoring services for events, shows, and conferences. Experienced anchor available for all types of events.',
+    description:
+      'Professional anchoring services for events, shows, and conferences. Experienced anchor available for all types of events.',
     email: COMPANY_EMAIL,
     telephone: COMPANY_PHONE,
     sameAs: [
@@ -43,7 +48,8 @@ export default function Document() {
     telephone: COMPANY_PHONE,
     email: COMPANY_EMAIL,
     image: `${WEBSITE_URL}/favicon.svg`,
-    description: 'Professional anchoring services for events, shows, and conferences.',
+    description:
+      'Professional anchoring services for events, shows, and conferences.',
     priceRange: '$$', // Adjust based on your pricing
     address: {
       '@type': 'PostalAddress',
@@ -63,7 +69,8 @@ export default function Document() {
     '@type': 'WebSite',
     name: COMPANY_NAME,
     url: WEBSITE_URL,
-    description: 'Professional anchoring services for events, shows, and conferences.',
+    description:
+      'Professional anchoring services for events, shows, and conferences.',
     potentialAction: {
       '@type': 'SearchAction',
       target: {
@@ -110,4 +117,3 @@ export default function Document() {
     </Html>
   );
 }
-

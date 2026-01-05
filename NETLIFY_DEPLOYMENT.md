@@ -131,6 +131,7 @@ NEXT_PUBLIC_INSTAGRAM_URL = https://instagram.com/yourhandle
 **Important:** 
 - Replace all placeholder values with your actual information
 - After adding variables, you'll need to **redeploy** for them to take effect
+- **Note:** The `netlify.toml` file is configured to allow `NEXT_PUBLIC_*` variables (they're intentionally public for client-side use)
 
 ---
 
@@ -212,6 +213,12 @@ Netlify automatically deploys when you push to your main branch:
 ## Troubleshooting
 
 ### Build Fails
+
+**Error: "Secrets scanning found secrets in build"**
+- This happens because `NEXT_PUBLIC_*` variables are intentionally public
+- The `netlify.toml` file is already configured to handle this
+- If you still see this error, verify `SECRETS_SCAN_OMIT_KEYS` is set in `netlify.toml`
+- You can also add `SECRETS_SCAN_ENABLED = false` to `netlify.toml` if needed (not recommended)
 
 **Error: "Build command failed"**
 - Check build logs for specific errors
